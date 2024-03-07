@@ -27,7 +27,7 @@
           <td>
             <form method="post" action="/check-out">
               <input type="hidden" name="bookId" value="<%= book._id %>">
-              <button type="submit">Check Out</button>
+              <button type="submit" <% if (book.quantity - book.checkedOutQuantity === 0) { %> disabled <% } %>>Check Out</button>
             </form>
           </td>
         </tr>
