@@ -49,6 +49,8 @@ app.post('/check-out', authController.isAuthenticated, bookController.checkOutBo
 app.get('/checked-out-books', authController.isAuthenticated, bookController.viewCheckedOutBooks);
 app.post('/return-book', authController.isAuthenticated, bookController.returnBook);
 
+app.get('/all-checked-out-books', authController.isAuthenticated, bookController.viewCheckedOutBooks);
+
 app.get('/profile', authController.isAuthenticated, userController.showProfile);
 app.get('/edit-profile', authController.isAuthenticated, userController.showEditProfile);
 app.post('/edit-profile', authController.isAuthenticated, userController.editUserDetails);

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checked Out Books</title>
+</head>
+<body>
+  <h1>All Checked Out Books</h1>
+  <% if (checkedOutBooks.length === 0) { %>
+    <p>No books checked out.</p>
+  <% } else { %>
+    <ul>
+      <% checkedOutBooks.forEach(book => { %>
+        <li>
+          <strong>Title:</strong> <%= book.title %><br>
+          <strong>Author:</strong> <%= book.author %><br>
+          <strong>Category:</strong> <%= book.category.name %><br>
+          <strong>Total Quantity Checked Out:</strong> <%= book.checkedOutQuantity %><br>
+        </li><br><br>
+      <% }); %>
+    </ul>
+  <p><strong>Total Number of Books Checked Out: </strong><%= checkedOutBooks.length %></p>
+  <% } %>
+</body>
+</html>

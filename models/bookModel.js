@@ -26,6 +26,18 @@ const getAllBooks = async () => {
   }
 };
 
+const getAllCheckedOutBooks = async () => {
+  const allBooks = await getAllBooks();
+  console.log(allBooks);
+  const checkedOutBooks = [];
+  allBooks.forEach(book => {
+    if(book.checkedOutQuantity != 0) {
+      checkedOutBooks.push(book);
+    }
+  });
+  return checkedOutBooks;
+}
+
 const deleteCategory = async (categoryId) => {
   try {
     await Book.deleteMany({ category: categoryId });
@@ -89,5 +101,6 @@ module.exports = {
   deleteBook,
   deleteCategory,
   checkOutBook,
+  getAllCheckedOutBooks,
   returnBook
 };

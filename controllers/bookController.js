@@ -28,8 +28,13 @@ const getIndexPage = async (req, res) => {
 
 const viewCheckedOutBooks = async (req, res) => {
   try {
-    const checkedOutBooks = await userModel.getUserCheckedOutBooks(req.session.user.username);
-    res.render('checkedOutBooks', { checkedOutBooks });
+    if(req.session.user.role === 'Customer') {
+      const checkedOutBooks = await userModel.getUserCheckedOutBooks(req.session.user.username);
+      res.render('checkedOutBooks', { checkedOutBooks });
+    } else {
+      const checkedOutBooks = await bookModel.getAllCheckedOutBooks();
+      res.render('librarianCheckedOutBooks', { checkedOutBooks });
+    }
   } catch(error) {
     console.log(error)
   }
