@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View All Users</title>
+</head>
+<body>
+  <h1>All Users</h1>
+  <ul>
+    <% users.forEach(user => { %>
+      <% if (user.username !== currentUser.username) { %>
+        <li>
+            <strong>Username:</strong> <%= user.username %><br>
+            <strong>Role:</strong> <%= user.role %><br>
+            <strong>First Name:</strong> <%= user.firstName %><br>
+            <strong>Last Name:</strong> <%= user.lastName %><br>
+            <strong>Email:</strong> <%= user.email %><br>
+            <strong>Phone Number:</strong> <%= user.phoneNumber %><br>
+            <form method="post" action="/block-user">
+              <input type="hidden" name="userId" value="<%= user._id %>">
+              <button type="submit">
+                  <% if (user.blocked === true) { %>
+                      Unblock User
+                    <% } else { %>
+                      Block User
+                    <% } %>
+              </button>
+            </form><br><br>
+        </li>
+      <% } %>
+    <% }) %>
+  </ul>
+</body>
+</html>

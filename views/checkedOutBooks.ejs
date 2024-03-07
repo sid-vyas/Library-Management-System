@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checked Out Books</title>
+</head>
+<body>
+  <h1>Checked Out Books</h1>
+  <% if (checkedOutBooks.length === 0) { %>
+    <p>No books checked out.</p>
+  <% } else { %>
+    <ul>
+      <% checkedOutBooks.forEach(book => { %>
+        <li>
+          <strong>Title:</strong> <%= book.title %><br>
+          <strong>Author:</strong> <%= book.author %><br>
+          <form method="post" action="/return-book">
+            <input type="hidden" name="bookId" value="<%= book._id %>">
+            <button type="submit">Return Book</button>
+          </form>
+        </li><br><br>
+      <% }); %>
+    </ul>
+  <% } %>
+</body>
+</html>

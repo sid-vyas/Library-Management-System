@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome</title>
+</head>
+<body>
+  <h1>Welcome to Our Library Management System</h1>
+  <p>A list of all books available right now:</p><br><br>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Category</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% books.forEach(book => { %>
+        <tr>
+          <td><%= book.title %></td>
+          <td><%= book.author %></td>
+          <td><%= book.category.name %></td>
+          <td><%= book.quantity - book.checkedOutQuantity %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  <br><br>
+  <p>Please <a href="/register">register</a> to get started.</p>
+  <p>Already registered? You can <a href="/login">login</a> here.</p>
+</body>
+</html>

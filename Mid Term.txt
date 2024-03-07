@@ -1,0 +1,24 @@
+Role - Admin Role
+Block Users
+Add Librarian
+Edit Own Admin details 
+Delete Books
+Delete Category
+
+Librarian
+Edit Own  details 
+View all books checked out
+CRUD Books (Qty)
+Add Category
+
+Customer/User
+If not logged in can view all books
+Register themselves
+Checkout books
+Return Books
+Edit own details 
+
+
+Post Redirect Get fuctionality if possible. Post first, Redirect then Get. Good practice so that there are no multiple Posts unnecessarily.
+
+MongoDB connection string: "mongodb+srv://siddharthvyas2321:admin@users.lq71znl.mongodb.net/?retryWrites=true&w=majority&appName=Users"
