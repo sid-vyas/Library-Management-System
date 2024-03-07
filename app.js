@@ -1,6 +1,7 @@
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+require('dotenv').config();
 
 const app = express();
 const port = 3000;
@@ -62,7 +63,7 @@ app.post('/block-user', userController.blockOrUnblockUser);
 
 
 const startApplication = async() => {
-  await mongoose.connect('mongodb+srv://siddharthvyas2321:admin@users.lq71znl.mongodb.net/?retryWrites=true&w=majority&appName=Users', {
+  await mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   })
