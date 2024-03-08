@@ -26,9 +26,26 @@ const getAllBooks = async () => {
   }
 };
 
+const getAllCategories = async () => {
+  try {
+    const categories = await Category.find();
+    return categories;
+  } catch (error) {
+    throw new Error('Error retrieving categories from the database');
+  }
+};
+
+const addCategory = async (categoryName) => {
+  try {
+    await Category.create({ name: categoryName });
+  } catch (error) {
+    console.log(error);
+    throw new Error('Error adding new category');
+  }
+};
+
 const getAllCheckedOutBooks = async () => {
   const allBooks = await getAllBooks();
-  console.log(allBooks);
   const checkedOutBooks = [];
   allBooks.forEach(book => {
     if(book.checkedOutQuantity != 0) {
@@ -102,5 +119,7 @@ module.exports = {
   deleteCategory,
   checkOutBook,
   getAllCheckedOutBooks,
-  returnBook
+  returnBook,
+  addCategory,
+  getAllCategories
 };

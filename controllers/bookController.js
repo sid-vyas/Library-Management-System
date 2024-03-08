@@ -26,6 +26,25 @@ const getIndexPage = async (req, res) => {
   }
 };
 
+const viewAddCategory = async (req, res) => {
+  try {
+    const categories = await bookModel.getAllCategories();
+    res.render('addCategory', { categories, error: null });
+  } catch(error) {
+    res.status(500).send('Error fetching categories');
+  }
+};
+
+const addCategory = async (req, res) => {
+  try {
+    const { categoryName } = req.body;
+    await bookModel.addCategory(categoryName);
+    res.redirect('/view-add-category');
+  } catch(error) {
+    res.status(500).send('Error adding new category.');
+  }
+};
+
 const viewCheckedOutBooks = async (req, res) => {
   try {
     if(req.session.user.role === 'Customer') {
@@ -124,5 +143,7 @@ module.exports = {
   getIndexPage,
   checkOutBook,
   viewCheckedOutBooks,
-  returnBook
+  returnBook,
+  addCategory,
+  viewAddCategory
 };

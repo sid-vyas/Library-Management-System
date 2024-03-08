@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Category</title>
+</head>
+<body>
+  <h1>Add Category</h1>
+  
+  <% if (error) { %>
+    <p style="color: red;"><%= error %></p>
+  <% } %>
+  
+  <% if (categories.length > 0) { %>
+    <h2>Existing Categories</h2>
+    <ul>
+      <% categories.forEach(category => { %>
+        <li><%= category.name %></li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>No categories found.</p>
+  <% } %>
+  
+  <form method="post" action="/add-category">
+    <div>
+      <label for="categoryName">Category Name:</label>
+      <input type="text" id="categoryName" name="categoryName" required>
+    </div>
+    <button type="submit">Add Category</button>
+  </form>
+</body>
+</html>

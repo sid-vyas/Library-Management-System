@@ -59,23 +59,16 @@ const returnBook = async (userId, bookId) => {
 }
 
 const getUserByUsernameAndPassword = async (username, password) => {
-  // Find the user by username
   const user = await User.findOne({ username });
-
   if (!user) {
     console.log('Username not found')
-    // If user is not found, return null
     return null;
   }
-  // Compare the provided password with the hashed password stored in the database
   const passwordMatch = password === user.password;
-
   if (passwordMatch) {
-    // If passwords match, return the user
     console.log('Password Match');
     return user;
   } else {
-    // If passwords don't match, return null
     console.log('Password Not Match');
     return null;
   }
