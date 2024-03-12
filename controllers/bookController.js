@@ -75,17 +75,25 @@ const returnBook = async (req, res) => {
 
 const showEditQuantityForm = async (req, res) => {
   try {
-      res.render('librarianEditBookQuantity');
+      const book = await bookModel.getBookToBeEdited(req.params.bookId);
+      res.render('librarianEditBookQuantity', { book } );
     } catch (error) {
     res.status(500).send('Internal Server Error');
   }
 };
 
-const showUpdateBookQuantity = async (req, res) => {
+const updateBookQuantity = async (req, res) => {
   try {
-      const { bookId } = req.body
-      res.render('librarianEditBookQuantity');
-    } catch (error) {
+    const { bookId, newQuantity } = req.body;
+    const isUpdated = await bookModel.updateBookQuantity(bookId, newQuantity);
+
+    if(isUpdated) {
+      const book = await bookModel.getBookToBeEdited(bookId);
+      res.render('librarianEditBookQuantity', { book } );
+    } else {
+      res.status(500).send('Erro updating book quantity');
+    }
+  } catch (error) {
     res.status(500).send('Internal Server Error');
   }
 };
@@ -139,7 +147,7 @@ module.exports = {
   deleteCategory,
   deleteBook,
   showEditQuantityForm,
-  showUpdateBookQuantity,
+  updateBookQuantity,
   getIndexPage,
   checkOutBook,
   viewCheckedOutBooks,

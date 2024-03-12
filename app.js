@@ -40,10 +40,10 @@ app.get('/logout', authController.isAuthenticated, authController.logout);
 app.get('/dashboard', authController.showDashboard);
 
 app.get('/books', authController.isAuthenticated, bookController.viewAllBooks);
-app.post('/delete-category', bookController.deleteCategory);
-app.post('/delete-book', bookController.deleteBook);
-app.get('/:bookId/edit-quantity', bookController.showEditQuantityForm);
-app.post('/:bookId/update-quantity', bookController.showUpdateBookQuantity);
+app.post('/delete-category', authController.isAuthenticated, bookController.deleteCategory);
+app.post('/delete-book', authController.isAuthenticated, bookController.deleteBook);
+app.get('/edit-quantity/:bookId', authController.isAuthenticated, bookController.showEditQuantityForm);
+app.post('/update-quantity', authController.isAuthenticated, bookController.updateBookQuantity);
 
 app.get('/view-add-category', authController.isAuthenticated, bookController.viewAddCategory);
 app.post('/add-category', authController.isAuthenticated, bookController.addCategory );

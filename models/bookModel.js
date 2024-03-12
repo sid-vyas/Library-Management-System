@@ -109,7 +109,25 @@ const deleteBook = async (bookId) => {
   } catch(error) {
     return false;
   }
-  
+};
+
+const getBookToBeEdited = async (bookId) => {
+  try {
+    const book = await Book.findById(bookId);
+    return book;
+  } catch(error) {
+    console.log(error);
+  }
+}
+
+const updateBookQuantity = async (bookId, newQuantity) => {
+  try {
+    await Book.findByIdAndUpdate(bookId, { quantity: newQuantity });
+    return true;
+  } catch (error) {
+    throw new Error('Error updating book quantity');
+    return false;
+  }
 };
 
 
@@ -121,5 +139,7 @@ module.exports = {
   getAllCheckedOutBooks,
   returnBook,
   addCategory,
-  getAllCategories
+  getAllCategories,
+  getBookToBeEdited,
+  updateBookQuantity
 };

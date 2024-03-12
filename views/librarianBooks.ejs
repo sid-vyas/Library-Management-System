@@ -29,7 +29,7 @@
           <td><%= book.checkedOutQuantity %></td>
           <td><%= book.quantity - book.checkedOutQuantity %></td>
           <td>
-            <form method="get" value = "<%= book._id %>" action="/<%= book._id %>/edit-quantity">
+            <form method="get" action="/edit-quantity/<%= book._id %>">
               <button type="submit">Edit Quantity</button>
             </form>
           </td>
