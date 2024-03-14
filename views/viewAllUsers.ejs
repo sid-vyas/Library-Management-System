@@ -7,8 +7,24 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  <h1>All Users</h1>
-  <ul>
+  <div class="navbar">
+    <a href="/dashboard" style="color: white; text-decoration: none;">
+      <div class="logo">
+        <h1>Library Management System</h1>
+      </div>
+    </a>
+    <div class="options">
+      <a href="/books">View Books</a>
+      <a href="/profile">View Profile</a>
+      <a href="/viewAllUsers">View All Users</a>
+      <a href="/add-librarian">Add Librarian</a>
+      <a href="/logout">Log Out</a>
+    </div>
+  </div>
+  <div class="content">
+    <div class="form-container">
+  <h2>All Users</h2>
+  <ul style="padding-left: 20px;">
     <% users.forEach(user => { %>
       <% if (user.username !== currentUser.username) { %>
         <li>
@@ -18,6 +34,7 @@
             <strong>Last Name:</strong> <%= user.lastName %><br>
             <strong>Email:</strong> <%= user.email %><br>
             <strong>Phone Number:</strong> <%= user.phoneNumber %><br>
+            <br>
             <form method="post" action="/block-user">
               <input type="hidden" name="userId" value="<%= user._id %>">
               <button type="submit">
@@ -32,5 +49,7 @@
       <% } %>
     <% }) %>
   </ul>
+</div>
+</div>
 </body>
 </html>

@@ -7,7 +7,23 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  <h1>Add Librarian</h1>
+  <div class="navbar">
+    <a href="/dashboard" style="color: white; text-decoration: none;">
+      <div class="logo">
+        <h1>Library Management System</h1>
+      </div>
+    </a>
+    <div class="options">
+      <a href="/books">View Books</a>
+      <a href="/profile">View Profile</a>
+      <a href="/viewAllUsers">View All Users</a>
+      <a href="/add-librarian">Add Librarian</a>
+      <a href="/logout">Log Out</a>
+    </div>
+  </div>
+  <div class="content">
+    <div class="form-container">
+  <h2>Add Librarian</h2>
   <% if (success) { %>
     <p style="color: green;"><%= success %></p>
   <% } %>
@@ -38,8 +54,10 @@
       <div>
         <label for="phoneNumber">Phone Number:</label>
         <input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{10}" required>
-      </div>
+      </div><br><br>
     <button type="submit">Add Librarian</button>
   </form>
+</div>
+</div>
 </body>
 </html>

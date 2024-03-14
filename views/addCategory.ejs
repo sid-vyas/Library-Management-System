@@ -23,14 +23,14 @@
   </div>
   <div class="content">
     <div class="form-container">
-      <h1>Add Category</h1>
+      <h2>Add Category</h2>
 
   <% if (error) { %>
     <p style="color: red;"><%= error %></p>
   <% } %>
   
   <% if (categories.length > 0) { %>
-    <h2>Existing Categories</h2>
+    <h3>Existing Categories</h3>
     <ul style="padding-left: 20px;">
       <% categories.forEach(category => { %>
         <li><%= category.name %></li>

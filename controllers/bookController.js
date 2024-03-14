@@ -5,8 +5,9 @@ const userModel = require('../models/userModel');
 const viewAllBooks = async (req, res) => {
   try {
     const books = await bookModel.getAllBooks();
+    const categories = await bookModel.getAllCategories();
     if(req.session.user.role === 'Admin') {
-      res.render('adminBooks', { books });
+      res.render('adminBooks', { books, categories });
     } else if (req.session.user.role === 'Librarian') {
       res.render('librarianBooks', { books });
     } else {

@@ -7,7 +7,23 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  <h1>All Books</h1>
+  <div class="navbar">
+    <a href="/dashboard" style="color: white; text-decoration: none;">
+      <div class="logo">
+        <h1>Library Management System</h1>
+      </div>
+    </a>
+    <div class="options">
+      <a href="/books">View Books</a>
+      <a href="/profile">View Profile</a>
+      <a href="/viewAllUsers">View All Users</a>
+      <a href="/add-librarian">Add Librarian</a>
+      <a href="/logout">Log Out</a>
+    </div>
+  </div>
+  <div class="content">
+    <div class="form-container">
+  <h2>All Books</h2>
   <table>
     <thead>
       <tr>
@@ -31,15 +47,38 @@
                 <button type="submit">Delete Book</button>
               </form>
             </td>
-            <td>
-              <form method="post" action="/delete-category">
-                <input type="hidden" name="categoryId" value="<%= book.category._id %>">
-                <button type="submit">Delete Category</button>
-              </form>
-            </td>
         </tr>
       <% }) %>
     </tbody>
   </table>
+    </div><br><br>
+
+    <div class="form-container">
+      <div class="category-list">
+        <h2>Categories</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Delete Category</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% categories.forEach(category => { %>
+              <tr>
+                <td><%= category.name %></td>
+                <td>
+                  <form method="post" action="/delete-category">
+                    <input type="hidden" name="categoryId" value="<%= category._id %>">
+                    <button type="submit">Delete</button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
