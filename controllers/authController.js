@@ -1,4 +1,5 @@
 const userModel = require('../models/userModel');
+const bookModel = require('../models/bookModel');
 
 const isAuthenticated = (req, res, next) => {
   if (req.session && req.session.user) {
@@ -11,13 +12,18 @@ const showLogin = (req, res) => {
   res.render('login', { error: null });
 };
 
-const showDashboard = (req, res) => {
-  if(req.session.user.role === 'Admin') {
-    res.render('adminDashboard', { error: null });
-  } else if(req.session.user.role === 'Librarian') {
-    res.render('librarianDashboard', {error: null});
-  } else {
-    res.render('customerDashboard', {error: null});
+const showDashboard = async (req, res) => {
+  try {
+    const books = await bookModel.getAllBooks();
+    if(req.session.user.role === 'Admin') {
+      res.render('adminDashboard', { error: null , books});
+    } else if(req.session.user.role === 'Librarian') {
+      res.render('librarianDashboard', {error: null , books});
+    } else {
+      res.render('customerDashboard', {error: null, books});
+    }
+    } catch (error) {
+    res.status(500).send('Error retrieving books from the database');
   }
 };
 

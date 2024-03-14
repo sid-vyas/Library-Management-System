@@ -4,16 +4,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
-<body>
-  <h1>Welcome to Your Dashboard</h1>
-  <p>What would you like to do?</p>
-  <ul>
-    <li><a href="/books">View Books</a></li>
-    <li><a href="/profile">View Profile</a></li>
-    <li><a href="/viewAllUsers">View All Users</a></li>
-    <li><a href="/add-librarian">Add Librarian</a></li>
-    <li><a href="/logout">Log Out</a></li>
-  </ul>
+<body style="margin: 0; padding-right: 0; padding-left: 0;">
+  <div class="navbar">
+    <div class="logo">
+      <h1>Library Dashboard</h1>
+    </div>
+    <div class="options">
+      <a href="/books">View Books</a>
+      <a href="/profile">View Profile</a>
+      <a href="/viewAllUsers">View All Users</a>
+      <a href="/add-librarian">Add Librarian</a>
+      <a href="/logout">Log Out</a>
+    </div>
+  </div>
+  <div class="content">
+    <h2>Welcome to Your Dashboard</h2>
+    <p>A list of all books available right now:</p><br><br>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Category</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% books.forEach(book => { %>
+          <tr>
+            <td><%= book.title %></td>
+            <td><%= book.author %></td>
+            <td><%= book.category.name %></td>
+            <td><%= book.quantity - book.checkedOutQuantity %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  
+  </div>
 </body>
 </html>

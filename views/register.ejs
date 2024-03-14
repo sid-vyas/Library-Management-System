@@ -4,9 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>User Registration</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  <h1>User Registration</h1>
+  <div class="container">
+    <div class="form-container">
+      <h1>User Registration</h1>
   <% if (error) { %>
     <p style="color: red;"><%= error %></p>
   <% } %>
@@ -44,7 +47,9 @@
       <input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{10}" required>
     </div>
     <button type="submit">Register</button>
-  </form>
+  </form><br><br>
   <p> Already registered? <a href = "/login">Click here</a> to Log In.</p>
+    </div>
+  </div>
 </body>
 </html>
