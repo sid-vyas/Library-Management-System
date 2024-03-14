@@ -45,7 +45,7 @@ app.get('/dashboard', authController.showDashboard);
 app.get('/books', authController.isAuthenticated, bookController.viewAllBooks);
 app.post('/delete-category', authController.isAuthenticated, bookController.deleteCategory);
 app.post('/delete-book', authController.isAuthenticated, bookController.deleteBook);
-app.get('/edit-quantity/:bookId', authController.isAuthenticated, bookController.showEditQuantityForm);
+app.post('/edit-quantity', authController.isAuthenticated, bookController.showEditQuantityForm);
 app.post('/update-quantity', authController.isAuthenticated, bookController.updateBookQuantity);
 
 app.get('/view-add-category', authController.isAuthenticated, bookController.viewAddCategory);

@@ -6,11 +6,13 @@
   <title>Dashboard</title>
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
-<body style="margin: 0; padding-right: 0; padding-left: 0;">
+<body>
   <div class="navbar">
-    <div class="logo">
-      <h1>Library Dashboard</h1>
-    </div>
+    <a href="/dashboard" style="color: white; text-decoration: none;">
+      <div class="logo">
+        <h1>Library Management System</h1>
+      </div>
+    </a>
     <div class="options">
       <a href="/profile">View Profile</a>
       <a href="/books">Check Out Books</a>
@@ -19,7 +21,8 @@
     </div>
   </div>
   <div class="content">
-    <h2>Welcome to Your Dashboard</h2>
+    <div class="form-container">
+      <h2>Welcome to Your Dashboard</h2>
     <p>A list of all books available right now:</p><br><br>
     <table>
       <thead>
@@ -41,6 +44,7 @@
         <% }) %>
       </tbody>
     </table>
+    </div>
   </div>
 </body>
 </html>

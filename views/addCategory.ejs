@@ -7,15 +7,31 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  <h1>Add Category</h1>
-  
+  <div class="navbar">
+    <a href="/dashboard" style="color: white; text-decoration: none;">
+      <div class="logo">
+        <h1>Library Management System</h1>
+      </div>
+    </a>
+    <div class="options">
+      <a href="/profile">View Profile</a>
+      <a href="/books">View Books</a>
+      <a href="/all-checked-out-books">View All Checked Out Books</a>
+      <a href="/view-add-category">View All Categories</a>
+      <a href="/logout">Log Out</a>
+    </div>
+  </div>
+  <div class="content">
+    <div class="form-container">
+      <h1>Add Category</h1>
+
   <% if (error) { %>
     <p style="color: red;"><%= error %></p>
   <% } %>
   
   <% if (categories.length > 0) { %>
     <h2>Existing Categories</h2>
-    <ul>
+    <ul style="padding-left: 20px;">
       <% categories.forEach(category => { %>
         <li><%= category.name %></li>
       <% }) %>
@@ -23,7 +39,7 @@
   <% } else { %>
     <p>No categories found.</p>
   <% } %>
-  
+  <br>
   <form method="post" action="/add-category">
     <div>
       <label for="categoryName">Category Name:</label>
@@ -31,5 +47,7 @@
     </div>
     <button type="submit">Add Category</button>
   </form>
+</div>
+</div>
 </body>
 </html>

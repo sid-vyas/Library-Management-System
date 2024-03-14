@@ -7,16 +7,50 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  <h1>User Profile</h1>
-  <p>Welcome, <%= user.firstName %> <%= user.lastName %>!</p>
-  <p>Username: <%= user.username %></p>
-  <p>Email: <%= user.email %></p>
-  <p>Phone Number: <%= user.phoneNumber %></p>
-  <p>Role: <%= user.role %></p><br><br>
-  <form method="get" action="/edit-profile">
-    <button type="submit">Edit Profile</button>
-  </form>
-  
+  <div class="navbar">
+    <a href="/dashboard" style="color: white; text-decoration: none;">
+      <div class="logo">
+        <h1>Library Management System</h1>
+      </div>
+    </a>
+    <% if (user.role === 'Admin') { %>
+      <div class="options">
+        <a href="/books">View Books</a>
+        <a href="/profile">View Profile</a>
+        <a href="/viewAllUsers">View All Users</a>
+        <a href="/add-librarian">Add Librarian</a>
+        <a href="/logout">Log Out</a>
+      </div>
+    <% } else if (user.role === 'Librarian') { %>
+      <div class="options">
+        <a href="/profile">View Profile</a>
+        <a href="/books">View Books</a>
+        <a href="/all-checked-out-books">View All Checked Out Books</a>
+        <a href="/view-add-category">View All Categories</a>
+        <a href="/logout">Log Out</a>
+      </div>
+    <% } else { %>
+      <div class="options">
+        <a href="/profile">View Profile</a>
+        <a href="/books">Check Out Books</a>
+        <a href="/checked-out-books">View Checked Out Books</a>
+        <a href="/logout">Log Out</a>
+      </div>
+    <% } %>
+  </div>
+  <div class="content">
+    <div class="form-container">
+      <h1>User Profile</h1>
+    <p>Welcome, <strong><%= user.firstName %> <%= user.lastName %></strong>!</p>
+    <p><strong>Username:</strong> <%= user.username %></p>
+    <p><strong>Email:</strong> <%= user.email %></p>
+    <p><strong>Phone Number:</strong> <%= user.phoneNumber %></p>
+    <p><strong>Role:</strong> <%= user.role %></p><br><br>
+    <form method="get" action="/edit-profile">
+      <button type="submit">Edit Profile</button>
+    </form>
+    </div>
+  </div>
 
 </body>
 </html>

@@ -7,33 +7,68 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  <h1>Edit Profile</h1>
-  <form method="post" action="/edit-profile">
-    <div>
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" value="<%= user.username %>" readonly>
-    </div>
-    <div>
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" value="<%= user.password %>" required>
-    </div>
-    <div>
-      <label for="firstName">First Name:</label>
-      <input type="text" id="firstName" name="firstName" value="<%= user.firstName %>" required>
-    </div>
-    <div>
-      <label for="lastName">Last Name:</label>
-      <input type="text" id="lastName" name="lastName" value="<%= user.lastName %>" required>
-    </div>
-    <div>
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" value="<%= user.email %>" required>
-    </div>
-    <div>
-      <label for="phoneNumber">Phone Number:</label>
-      <input type="tel" id="phoneNumber" name="phoneNumber" value="<%= user.phoneNumber %>" pattern="[0-9]{10}" required>
-    </div>
-    <button type="submit">Save Changes</button>
-  </form>
+  <div class="navbar">
+    <a href="/dashboard" style="color: white; text-decoration: none;">
+      <div class="logo">
+        <h1>Library Management System</h1>
+      </div>
+    </a>
+    <% if (user.role === 'Admin') { %>
+      <div class="options">
+        <a href="/books">View Books</a>
+        <a href="/profile">View Profile</a>
+        <a href="/viewAllUsers">View All Users</a>
+        <a href="/add-librarian">Add Librarian</a>
+        <a href="/logout">Log Out</a>
+      </div>
+    <% } else if (user.role === 'Librarian') { %>
+      <div class="options">
+        <a href="/profile">View Profile</a>
+        <a href="/books">View Books</a>
+        <a href="/all-checked-out-books">View All Checked Out Books</a>
+        <a href="/view-add-category">View All Categories</a>
+        <a href="/logout">Log Out</a>
+      </div>
+    <% } else { %>
+      <div class="options">
+        <a href="/profile">View Profile</a>
+        <a href="/books">Check Out Books</a>
+        <a href="/checked-out-books">View Checked Out Books</a>
+        <a href="/logout">Log Out</a>
+      </div>
+    <% } %>
+  </div>
+  <div class="content">
+      <div class="form-container">
+        <h1>Edit Profile</h1>
+        <form method="post" action="/edit-profile">
+          <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" value="<%= user.username %>" readonly>
+          </div>
+          <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" value="<%= user.password %>" required>
+          </div>
+          <div>
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" value="<%= user.firstName %>" required>
+          </div>
+          <div>
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" value="<%= user.lastName %>" required>
+          </div>
+          <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="<%= user.email %>" required>
+          </div>
+          <div>
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="tel" id="phoneNumber" name="phoneNumber" value="<%= user.phoneNumber %>" pattern="[0-9]{10}" required>
+          </div><br><br>
+          <button type="submit">Save Changes</button>
+        </form>
+      </div>
+  </div>
 </body>
 </html>

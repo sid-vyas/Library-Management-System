@@ -7,33 +7,50 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  <h1>All Books</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Category</th>
-        <th>Quantity</th>
-        <th>Check Out Book</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% books.forEach(book => { %>
+  <div class="navbar">
+    <a href="/dashboard" style="color: white; text-decoration: none;">
+      <div class="logo">
+        <h1>Library Management System</h1>
+      </div>
+    </a>
+    <div class="options">
+      <a href="/profile">View Profile</a>
+      <a href="/books">Check Out Books</a>
+      <a href="/checked-out-books">View Checked Out Books</a>
+      <a href="/logout">Log Out</a>
+    </div>
+  </div>
+  <div class="content">
+    <div class="form-container">
+      <h1>All Books</h1>
+    <table>
+      <thead>
         <tr>
-          <td><%= book.title %></td>
-          <td><%= book.author %></td>
-          <td><%= book.category.name %></td>
-          <td><%= book.quantity - book.checkedOutQuantity %></td>
-          <td>
-            <form method="post" action="/check-out">
-              <input type="hidden" name="bookId" value="<%= book._id %>">
-              <button type="submit" <% if (book.quantity - book.checkedOutQuantity === 0) { %> disabled <% } %>>Check Out</button>
-            </form>
-          </td>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Category</th>
+          <th>Quantity</th>
+          <th>Check Out Book</th>
         </tr>
-      <% }) %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% books.forEach(book => { %>
+          <tr>
+            <td><%= book.title %></td>
+            <td><%= book.author %></td>
+            <td><%= book.category.name %></td>
+            <td><%= book.quantity - book.checkedOutQuantity %></td>
+            <td>
+              <form method="post" action="/check-out">
+                <input type="hidden" name="bookId" value="<%= book._id %>">
+                <button type="submit" <% if (book.quantity - book.checkedOutQuantity === 0) { %> disabled <% } %>>Check Out</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+    </div>
+  </div>
 </body>
 </html>

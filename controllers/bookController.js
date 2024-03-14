@@ -75,7 +75,7 @@ const returnBook = async (req, res) => {
 
 const showEditQuantityForm = async (req, res) => {
   try {
-      const book = await bookModel.getBookToBeEdited(req.params.bookId);
+      const book = await bookModel.getBookToBeEdited(req.body.bookId);
       res.render('librarianEditBookQuantity', { book } );
     } catch (error) {
     res.status(500).send('Internal Server Error');

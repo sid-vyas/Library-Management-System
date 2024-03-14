@@ -7,22 +7,39 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  <h1>Checked Out Books</h1>
-  <% if (checkedOutBooks.length === 0) { %>
-    <p>No books checked out.</p>
-  <% } else { %>
-    <ul>
-      <% checkedOutBooks.forEach(book => { %>
-        <li>
-          <strong>Title:</strong> <%= book.title %><br>
-          <strong>Author:</strong> <%= book.author %><br>
-          <form method="post" action="/return-book">
-            <input type="hidden" name="bookId" value="<%= book._id %>">
-            <button type="submit">Return Book</button>
-          </form>
-        </li><br><br>
-      <% }); %>
-    </ul>
-  <% } %>
+  <div class="navbar">
+    <a href="/dashboard" style="color: white; text-decoration: none;">
+      <div class="logo">
+        <h1>Library Management System</h1>
+      </div>
+    </a>
+    <div class="options">
+      <a href="/profile">View Profile</a>
+      <a href="/books">Check Out Books</a>
+      <a href="/checked-out-books">View Checked Out Books</a>
+      <a href="/logout">Log Out</a>
+    </div>
+  </div>
+  <div class="content">
+    <div class="form-container">
+      <h1>Checked Out Books</h1>
+      <% if (checkedOutBooks.length === 0) { %>
+        <p>No books checked out.</p>
+      <% } else { %>
+        <ul style="padding-left: 20px;">
+          <% checkedOutBooks.forEach(book => { %>
+            <li>
+              <strong>Title:</strong> <%= book.title %><br>
+              <strong>Author:</strong> <%= book.author %><br><br>
+              <form method="post" action="/return-book">
+                <input type="hidden" name="bookId" value="<%= book._id %>">
+                <button type="submit">Return Book</button>
+              </form>
+            </li><br><br>
+          <% }); %>
+        </ul>
+      <% } %>
+  </div>
+</div>
 </body>
 </html>
