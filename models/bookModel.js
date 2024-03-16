@@ -13,13 +13,14 @@ const bookSchema = new mongoose.Schema({
   quantity: { type: Number, required: true },
   checkedOutQuantity: { type: Number, required: true },
   category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true },
+  checkedOutBy: { type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], default: [] }
 });
 
 const Book = mongoose.model('Book', bookSchema);
 
 const getAllBooks = async () => {
   try {
-    const books = await Book.find().populate('category');
+    const books = await Book.find().populate('category').populate('checkedOutBy');
     return books;
   } catch (error) {
     throw new Error('Error retrieving books from the database');
@@ -72,6 +73,12 @@ const checkOutBook = async (userId, bookId) => {
   try {
     await Book.findByIdAndUpdate(
       bookId,
+      { $push: { checkedOutBy: userId } },
+      { new: true }
+    );
+
+    await Book.findByIdAndUpdate(
+      bookId,
       { $inc: { checkedOutQuantity: 1 } },
       { new: true }
     );
@@ -87,6 +94,13 @@ const checkOutBook = async (userId, bookId) => {
 
 const returnBook = async (userId, bookId) => {
   try {
+
+    await Book.findByIdAndUpdate(
+      bookId,
+      { $pull: { checkedOutBy: userId } },
+      { new: true }
+  );
+
     await Book.findByIdAndUpdate(
       bookId,
       { $inc: { checkedOutQuantity: -1 } },

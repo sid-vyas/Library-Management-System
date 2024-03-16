@@ -28,6 +28,7 @@
         <a href="/dashboard"><i class="fas fa-arrow-left" style="color: black;"></i></a>
       </div>
       <br>
+      <% var totalNumberOfBooks = 0 %>
   <h2>All Checked Out Books</h2>
   <% if (checkedOutBooks.length === 0) { %>
     <p>No books checked out.</p>
@@ -39,10 +40,15 @@
           <strong>Author:</strong> <%= book.author %><br>
           <strong>Category:</strong> <%= book.category.name %><br>
           <strong>Total Quantity Checked Out:</strong> <%= book.checkedOutQuantity %><br>
+          <strong>Checked Out By: </strong><br>
+          <% book.checkedOutBy.forEach(user => { %>
+            <% totalNumberOfBooks++ %>
+            &nbsp;&nbsp;&nbsp;&nbsp; <strong>-</strong> <%= user.firstName %> <%= user.lastName %> (<i><%= user.email %></i>) <br>
+          <% }); %>
         </li><br><br>
       <% }); %>
     </ul><hr><br>
-  <p style="padding-left: 10px;"><strong>Total Number of Books Checked Out: </strong><%= checkedOutBooks.length %></p>
+  <p style="padding-left: 10px;"><strong>Total Number of Books Checked Out: </strong><%= totalNumberOfBooks %></p>
   <% } %>
 </div>
 </div>
