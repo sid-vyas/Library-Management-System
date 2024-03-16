@@ -10,10 +10,6 @@ const port = 3000;
 // Database connection
 const mongoose = require('mongoose');
 
-// Models
-const userModel = require('./models/userModel');
-const bookModel = require('./models/bookModel');
-
 // Controllers
 const authController = require('./controllers/authController');
 const userController = require('./controllers/userController');
@@ -30,44 +26,42 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'views')));
 
 
-// Routes
+// Common Routes
 app.get('/', bookController.getIndexPage);
-
 app.get('/register', userController.viewRegistrationForm);
 app.post('/register', userController.registerUser);
-
 app.get('/login', authController.showLogin);
 app.post('/login', authController.login);
 app.get('/logout', authController.isAuthenticated, authController.logout);
-
 app.get('/dashboard', authController.showDashboard);
-
 app.get('/books', authController.isAuthenticated, bookController.viewAllBooks);
-app.post('/delete-category', authController.isAuthenticated, bookController.deleteCategory);
-app.post('/delete-book', authController.isAuthenticated, bookController.deleteBook);
-app.post('/edit-quantity', authController.isAuthenticated, bookController.showEditQuantityForm);
-app.post('/update-quantity', authController.isAuthenticated, bookController.updateBookQuantity);
-
-app.get('/view-add-category', authController.isAuthenticated, bookController.viewAddCategory);
-app.post('/add-category', authController.isAuthenticated, bookController.addCategory );
-
-app.post('/check-out', authController.isAuthenticated, bookController.checkOutBook);
-app.get('/checked-out-books', authController.isAuthenticated, bookController.viewCheckedOutBooks);
-app.post('/return-book', authController.isAuthenticated, bookController.returnBook);
-
-app.get('/all-checked-out-books', authController.isAuthenticated, bookController.viewCheckedOutBooks);
-
 app.get('/profile', authController.isAuthenticated, userController.showProfile);
 app.get('/edit-profile', authController.isAuthenticated, userController.showEditProfile);
 app.post('/edit-profile', authController.isAuthenticated, userController.editUserDetails);
 
-app.get('/viewAllUsers', authController.isAuthenticated, userController.viewAllUsers);
 
+// Admin Routes
+app.post('/delete-category', authController.isAuthenticated, bookController.deleteCategory);
+app.post('/delete-book', authController.isAuthenticated, bookController.deleteBook);
+app.post('/block-user', userController.blockOrUnblockUser);
+app.get('/viewAllUsers', authController.isAuthenticated, userController.viewAllUsers);
 app.get('/add-librarian', authController.isAuthenticated, userController.showAddLibrarian);
 app.post('/add-librarian', authController.isAuthenticated, userController.createLibrarian);
 
 
-app.post('/block-user', userController.blockOrUnblockUser);
+// Librarian Routes
+app.post('/edit-quantity', authController.isAuthenticated, bookController.showEditQuantityForm);
+app.post('/update-quantity', authController.isAuthenticated, bookController.updateBookQuantity);
+app.get('/view-add-category', authController.isAuthenticated, bookController.viewAddCategory);
+app.post('/add-category', authController.isAuthenticated, bookController.addCategory );
+app.get('/all-checked-out-books', authController.isAuthenticated, bookController.viewCheckedOutBooks);
+
+
+// Customer Routes
+app.post('/check-out', authController.isAuthenticated, bookController.checkOutBook);
+app.get('/checked-out-books', authController.isAuthenticated, bookController.viewCheckedOutBooks);
+app.post('/return-book', authController.isAuthenticated, bookController.returnBook);
+
 
 
 const startApplication = async() => {
